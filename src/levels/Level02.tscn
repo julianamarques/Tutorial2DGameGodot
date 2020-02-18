@@ -1,0 +1,234 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/tileset.png" type="Texture" id=1]
+[ext_resource path="res://src/actors/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/actors/enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actors/enemy2.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/background.png" type="Texture" id=5]
+[ext_resource path="res://src/objects/coin.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/objects/Portal2D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/levels/Finish.tscn" type="PackedScene" id=8]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 80, 0, 80, 80, 0, 80 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "tileset.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 80, 80 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="Animation" id=3]
+resource_name = "bouncing"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("coin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -19 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_out"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "bouncing"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("coin:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -19 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "fade_out"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[node name="Level02" type="Node2D"]
+__meta__ = {
+"_edit_vertical_guides_": [ 5598.0 ]
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="background" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 2810.5, 240 )
+scale = Vector2( 2.93177, 0.869444 )
+texture = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( -400, 0 )
+tile_set = SubResource( 2 )
+cell_size = Vector2( 80, 80 )
+collision_layer = 8
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -196603, 0, 0, -196534, 0, 0, -131067, 0, 0, -130998, 0, 0, -65531, 0, 0, -65462, 0, 0, 5, 0, 0, 74, 0, 0, 65541, 0, 0, 65610, 0, 0, 131077, 0, 0, 131146, 0, 0, 196613, 0, 0, 196655, 0, 0, 196656, 0, 0, 196657, 0, 0, 196680, 0, 0, 196681, 0, 0, 196682, 0, 0, 262149, 0, 0, 262187, 0, 0, 262188, 0, 0, 262189, 0, 0, 262213, 0, 0, 262214, 0, 0, 262215, 0, 0, 262216, 0, 0, 262217, 0, 0, 262218, 0, 0, 327685, 0, 0, 327719, 0, 0, 327720, 0, 0, 327721, 0, 0, 327747, 0, 0, 327748, 0, 0, 327749, 0, 0, 327750, 0, 0, 327751, 0, 0, 327752, 0, 0, 327753, 0, 0, 327754, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393252, 0, 0, 393253, 0, 0, 393282, 0, 0, 393283, 0, 0, 393284, 0, 0, 393285, 0, 0, 393286, 0, 0, 393287, 0, 0, 393288, 0, 0, 393289, 0, 0, 393290, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 458772, 0, 0, 458773, 0, 0, 458774, 0, 0, 458775, 0, 0, 458776, 0, 0, 458777, 0, 0, 458778, 0, 0, 458779, 0, 0, 458780, 0, 0, 458781, 0, 0, 458782, 0, 0, 458783, 0, 0, 458784, 0, 0, 458785, 0, 0, 458786, 0, 0, 458787, 0, 0, 458788, 0, 0, 458789, 0, 0, 458790, 0, 0, 458791, 0, 0, 458792, 0, 0, 458793, 0, 0, 458794, 0, 0, 458795, 0, 0, 458796, 0, 0, 458797, 0, 0, 458798, 0, 0, 458799, 0, 0, 458800, 0, 0, 458801, 0, 0, 458802, 0, 0, 458803, 0, 0, 458804, 0, 0, 458805, 0, 0, 458806, 0, 0, 458807, 0, 0, 458808, 0, 0, 458809, 0, 0, 458810, 0, 0, 458811, 0, 0, 458812, 0, 0, 458813, 0, 0, 458814, 0, 0, 458815, 0, 0, 458816, 0, 0, 458817, 0, 0, 458818, 0, 0, 458819, 0, 0, 458820, 0, 0, 458821, 0, 0, 458822, 0, 0, 458823, 0, 0, 458824, 0, 0, 458825, 0, 0, 458826, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 524315, 0, 0, 524316, 0, 0, 524317, 0, 0, 524318, 0, 0, 524319, 0, 0, 524320, 0, 0, 524321, 0, 0, 524322, 0, 0, 524323, 0, 0, 524324, 0, 0, 524325, 0, 0, 524326, 0, 0, 524327, 0, 0, 524328, 0, 0, 524329, 0, 0, 524330, 0, 0, 524331, 0, 0, 524332, 0, 0, 524333, 0, 0, 524334, 0, 0, 524335, 0, 0, 524336, 0, 0, 524337, 0, 0, 524338, 0, 0, 524339, 0, 0, 524340, 0, 0, 524341, 0, 0, 524342, 0, 0, 524343, 0, 0, 524344, 0, 0, 524345, 0, 0, 524346, 0, 0, 524347, 0, 0, 524348, 0, 0, 524349, 0, 0, 524350, 0, 0, 524351, 0, 0, 524352, 0, 0, 524353, 0, 0, 524354, 0, 0, 524355, 0, 0, 524356, 0, 0, 524357, 0, 0, 524358, 0, 0, 524359, 0, 0, 524360, 0, 0, 524361, 0, 0, 524362, 0, 0 )
+
+[node name="enemy2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 647, 535 )
+
+[node name="enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1470, 565 )
+
+[node name="coin" parent="." instance=ExtResource( 6 )]
+position = Vector2( 943, 496 )
+
+[node name="coin2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 819, 496 )
+
+[node name="AnimationPlayer" parent="coin2" index="2"]
+anims/bouncing = SubResource( 3 )
+anims/fade_out = SubResource( 4 )
+
+[node name="coin3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1058, 496 )
+
+[node name="AnimationPlayer" parent="coin3" index="2"]
+anims/bouncing = SubResource( 5 )
+anims/fade_out = SubResource( 6 )
+
+[node name="enemy3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3132, 307 )
+
+[node name="coin4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2571, 381 )
+
+[node name="coin5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2836, 338 )
+
+[node name="coin6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3174, 296 )
+
+[node name="coin7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3471, 190 )
+
+[node name="coin8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4127, 455 )
+
+[node name="coin9" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4423, 455 )
+
+[node name="coin10" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4646, 434 )
+
+[node name="enemy4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3450, 540 )
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 157, 475 )
+
+[node name="Portal2D" parent="." instance=ExtResource( 7 )]
+position = Vector2( 5462, 231 )
+next_scene = ExtResource( 8 )
+
+[editable path="coin"]
+
+[editable path="coin2"]
+
+[editable path="coin3"]
